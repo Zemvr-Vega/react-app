@@ -27,7 +27,7 @@ function App() {
   }
 
   const deleteForm = (index) => {
-    
+    setTodo()
   }
 
   return (
