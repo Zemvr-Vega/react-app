@@ -2,13 +2,13 @@ import './App.css';
 import Card from './Card';
 import TodoItem from './TodoItem';
 
-function Todo({title, todo, todokey, onTodoDelete, onTodoEdit}) {
+function Todo({title, todo, onTodoDelete, onTodoEdit, id}) {
     function onDelete() {
-        onTodoDelete(todokey);
+        onTodoDelete(id);
     }
 
     function onEdit() {
-        onTodoEdit(todokey);
+        onTodoEdit(id);
     }
 
     return (
