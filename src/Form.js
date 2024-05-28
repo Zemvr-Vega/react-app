@@ -7,9 +7,11 @@ function Form({save, onClearForm, toEdit}) {
 
     const [inputs, setInputs] = useState([]);
 
-    // useEffect(() => {
-    //     (toEdit?.todo) && setInputs(toEdit.todo);
-    // }, [toEdit]);
+    useEffect(() => {
+        if (toEdit) {
+            setInputs(toEdit.todo);
+        }
+    }, [toEdit]);
 
     const titleRef = useRef();
     const taskRef = useRef([]);
@@ -35,13 +37,12 @@ function Form({save, onClearForm, toEdit}) {
         }
     }
 
-
     return (
         <form id="form" className=' flex-1 flex flex-col gap-5'>
-            <Input label="Todo Title" type="text" ref={titleRef} inpValue=""/>
+            <Input label="Todo Title" type="text" ref={titleRef} inpValue={(toEdit?.title) && toEdit.title}/>
             {
                 inputs.map((input, index) => {
-                    return <Input key={index} label={`Task ${index+1}`} inpValue={input} type="text" ref={ref => taskRef.current[index] = ref}/>
+                    return <Input key={index + input} label={`Task ${index+1}`} inpValue={input} type="text" ref={ref => taskRef.current[index] = ref}/>
                 })
             }
             <button type="button" className={`w-[100%] max-w-[34rem] rounded-md bg-blue-100 hover:bg-blue-200 p-3 transition-all ${(inputs.length > 4) ? ' cursor-not-allowed hover:bg-gray-100' : ''}`} onClick={addInput}>Add task</button>
